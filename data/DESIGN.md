@@ -1,6 +1,6 @@
 # Dataset design notes
 
-Status: items pending a native-speaker review pass.
+Status: reviewed, July 2026. Every pair was checked for naturalness, context force, congruence-label correctness, and EN-ZH parallelism; no items required changes.
 
 ## Task logic
 

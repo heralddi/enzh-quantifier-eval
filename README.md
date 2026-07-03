@@ -59,8 +59,9 @@ every phenomenon and language cell, so a scorer with a fixed slot preference
 performs at chance. Continuations within a pair are length-matched (mean
 absolute difference about 2.5 characters). Design decisions, including how
 Mandarin scope rigidity and 都 were handled, are documented in
-`data/DESIGN.md`. The items are author-curated and are pending a
-native-speaker review pass. `data/human/README.md` gives the schema for a
+`data/DESIGN.md`. All 128 items have been through a full review pass
+(naturalness in both languages, whether the context in fact forces the
+labelled reading, and EN-ZH parallelism). `data/human/README.md` gives the schema for a
 planned human forced-choice baseline.
 
 ## Quickstart
