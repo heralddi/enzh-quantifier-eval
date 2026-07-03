@@ -65,7 +65,7 @@ planned human forced-choice baseline.
 
 ## Quickstart
 
-Requires Python 3.13 on macOS or Linux. The first scoring run downloads
+Requires Python 3.13 or newer on macOS or Linux. The first scoring run downloads
 Qwen2.5-0.5B (about 1 GB) into the Hugging Face cache.
 
 ```bash
