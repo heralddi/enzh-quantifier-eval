@@ -61,8 +61,15 @@ def test_forced_balance(rows):
     for ph in PHENOMENA:
         for lang in ("en", "zh"):
             a, b = counts[(ph, lang, "A")], counts[(ph, lang, "B")]
-            assert a + b == 16
-            assert abs(a - b) <= 2, (ph, lang, a, b)
+            assert (a, b) == (8, 8), (ph, lang, a, b)
+
+
+def test_continuation_length_matching(rows):
+    # Summed log probability favours the shorter continuation, so pairs
+    # must stay close in length for the comparison to be fair.
+    diffs = [abs(len(r["cont_A"]) - len(r["cont_B"])) for r in rows]
+    assert max(diffs) <= 10, max(diffs)
+    assert sum(diffs) / len(diffs) <= 4.0
 
 
 def test_target_wording_constraints(rows):
