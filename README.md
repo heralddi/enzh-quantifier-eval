@@ -1,5 +1,7 @@
 # enzh-quantifier-eval
 
+[![tests](https://github.com/heralddi/enzh-quantifier-eval/actions/workflows/tests.yml/badge.svg)](https://github.com/heralddi/enzh-quantifier-eval/actions/workflows/tests.yml)
+
 A parallel English and Mandarin test suite for context-forced quantifier and
 scalar interpretation, with a language model scoring harness and a Bayesian
 hierarchical analysis.
