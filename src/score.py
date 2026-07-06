@@ -93,17 +93,19 @@ def score_item(model, tokenizer, row, normalise=False):
 def pick_device():
     import torch
 
+    if torch.cuda.is_available():
+        return "cuda"
     if torch.backends.mps.is_available():
         return "mps"
     return "cpu"
 
 
-def run(items_path, out_path, model_names, normalise=False):
+def run(items_path, out_path, model_names, normalise=False, device=None):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     items = load_items(items_path)
-    device = pick_device()
+    device = device or pick_device()
     rows_out = []
     for name in model_names:
         t0 = time.time()
@@ -126,6 +128,8 @@ def run(items_path, out_path, model_names, normalise=False):
         del model
         print(f"done {name}: {len(todo)} items in {time.time() - t0:.1f}s")
 
+    if not rows_out:
+        raise SystemExit("no items were scored, nothing to write")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     fieldnames = list(rows_out[0].keys())
     with open(out_path, "w", newline="", encoding="utf-8") as f:
@@ -145,8 +149,19 @@ def main():
         action="store_true",
         help="choose by mean per-token log probability instead of the sum",
     )
+    ap.add_argument(
+        "--device",
+        default=None,
+        help="cpu, cuda, or mps (default: autodetect)",
+    )
     args = ap.parse_args()
-    run(args.items, args.out, args.models, normalise=args.normalise)
+    run(
+        args.items,
+        args.out,
+        args.models,
+        normalise=args.normalise,
+        device=args.device,
+    )
 
 
 if __name__ == "__main__":
